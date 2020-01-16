@@ -1,6 +1,6 @@
 class Impl
   def self.run(wire_one, wire_two)
-    6
+    crossing(wire_one, wire_two).map { |x,y| x.abs + y.abs }.min
   end
 
   def self.positions(wire)
