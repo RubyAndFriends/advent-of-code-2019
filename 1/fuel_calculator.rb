@@ -7,7 +7,17 @@ class FuelCalculator
     data.sum { |mass| calculate(mass) }
   end
 
-  def self.calculate(mass)
-    mass / 3 - 2
+  def self.calculate(module_mass)
+    tmp = calculate_naively(module_mass)
+    if tmp.zero?
+      tmp
+    else
+      tmp + calculate(tmp)
+    end
+  end
+
+  def self.calculate_naively(module_mass)
+    fuel = module_mass / 3 - 2
+    fuel.negative? ? 0 : fuel
   end
 end
