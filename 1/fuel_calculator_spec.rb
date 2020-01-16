@@ -12,4 +12,12 @@ describe FuelCalculator do
   it "For a mass of 1969, the fuel required is 654" do
     expect(described_class.calculate(1969)).to eq 654
   end
+
+  xit "calculates the fuel needed for the masses in a file" do
+    expect(described_class.from_file("input.txt")).to eq 123
+  end
+
+  it "calculates the fuel needed for the masses in an array" do
+    expect(described_class.from_data([1969, 12])).to eq 654 + 2
+  end
 end
