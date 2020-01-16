@@ -11,7 +11,6 @@ describe Impl do
 
   it "finds positions" do
     expect(Impl.positions("U1,L2,D3,R4")).to eq [
-      [0, 0],
       [0, 1],
       [-1, 1],
       [-2, 1],
@@ -23,5 +22,19 @@ describe Impl do
       [1, -2],
       [2, -2],
     ]
+  end
+
+  # ...........
+  # .+-----+...
+  # .|.....|...
+  # 5|..+--X-+.
+  # .|..|..|.|.
+  # 3|.-X--+.|.
+  # .|..|....|.
+  # .|.......|.
+  # .o-------+.
+  # ....3..6...
+  it "finds crossing positions" do
+    expect(Impl.crossing("R8,U5,L5,D3", "U7,R6,D4,L4")).to contain_exactly([3,3], [6,5])
   end
 end

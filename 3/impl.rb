@@ -5,7 +5,7 @@ class Impl
 
   def self.positions(wire)
     x, y = [0, 0]
-    all = [[x,y]]
+    all = []
     wire.split(",").each do |instruction|
       direction, steps = instruction.match(/(.)(.+)/)[1..2]
       steps = steps.to_i
@@ -20,5 +20,9 @@ class Impl
       end
     end
     all
+  end
+
+  def self.crossing(wire_one, wire_two)
+    positions(wire_one).intersection(positions(wire_two))
   end
 end
