@@ -8,4 +8,8 @@ describe FuelCalculator do
   it "For a mass of 14, dividing by 3 and rounding down still yields 4, so the fuel required is also 2" do
     expect(described_class.calculate(14)).to eq 2
   end
+
+  it "For a mass of 1969, the fuel required is 654" do
+    expect(described_class.calculate(1969)).to eq 654
+  end
 end
