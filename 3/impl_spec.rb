@@ -41,4 +41,9 @@ describe Impl do
   it "finds crossing positions" do
     expect(Impl.crossing("R8,U5,L5,D3", "U7,R6,D4,L4")).to contain_exactly([3,3], [6,5])
   end
+
+  it "solves task 1" do
+    w1, w2 = File.read("input.txt").split
+    expect(Impl.run(w1, w2)).to eq 860
+  end
 end
