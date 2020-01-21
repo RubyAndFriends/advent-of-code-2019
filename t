@@ -32,7 +32,10 @@ class TestAndCommit
   end
 
   def update_json_output
-    File.write(json_file, new_output)
+    json = JSON.load(new_output)
+    json["examples"].each { |ex| ex.delete("run_time") }
+    json["summary"].delete("duration")
+    File.write(json_file, json.to_json)
   end
 
   def git_add
@@ -57,7 +60,7 @@ class TestAndCommit
   end
 
   def new_specs
-    @new_specs ||= JSON.load(new_output)["examples"].map { |ex| ex["full_description"] }
+    @new_specs ||= descriptions_from_output(new_output)
   end
 
   def new_output
@@ -67,11 +70,18 @@ class TestAndCommit
   def old_specs
     @old_specs ||= begin
       if File.exists?(json_file)
-        JSON.load(File.read(json_file))["examples"].map { |ex| ex["full_description"] }
+        descriptions_from_output(File.read(json_file))
       else
         []
       end
     end
+  end
+
+  def descriptions_from_output(json_string)
+    JSON
+    .load(json_string)["examples"]
+    .reject { |ex| ex["status"] == "pending" }
+    .map { |ex| ex["full_description"] }
   end
 
   def commitmsg
