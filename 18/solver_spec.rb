@@ -1,5 +1,16 @@
 require_relative "solver"
 
+describe Maze do
+  describe "#width" do
+    context "for basic_example_1" do
+      it "returns 5" do
+        maze = Maze.new(File.read("fixtures/basic_example_1"))
+        expect(maze.width).to eq(5)
+      end
+    end
+  end
+end
+
 describe Solver do
   describe ".solve_file" do
     context "for basic_example_1" do
